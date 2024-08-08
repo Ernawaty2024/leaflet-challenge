@@ -13,7 +13,7 @@ Plot a second dataset to illustrate the relationship between tectonic plates and
 
 ## Part 1: Create the Earthquake Visualization
 ### Step 1: Get the Dataset
-1. 2. The USGS provided earthquake data in several different formats, updated every 5 minutes. The USGS GeoJSON Feed page was visited to choose a dataset to visualize.
+1. The USGS provided earthquake data in several different formats, updated every 5 minutes. The USGS GeoJSON Feed page was visited to choose a dataset to visualize.
 When a dataset (such as "All Earthquakes from the Past 7 Days") was clicked, a JSON representation of that data was provided. The URL of this JSON was used to pull in the data for the visualization.
 ### Step 2: Import and Visualize the Data
 1. Using Leaflet, a map was created to plot all the earthquakes from the dataset based on their longitude and latitude.
