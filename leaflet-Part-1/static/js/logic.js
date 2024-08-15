@@ -1,3 +1,15 @@
+// Initialize the map and set its view
+let myMap = L.map("map", {
+    center: [40.758701, -111.876183], 
+    zoom: 5,
+    fillOpacity : 1
+});
+
+// Add a tile layer (basemap) to the map
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(myMap);
+
 // Store our API endpoint as queryUrl
 let queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
@@ -9,25 +21,34 @@ d3.json(queryUrl).then(function(data) {
 
 // Function to determine the color based on depth
 function getColor(depth) {
-    return depth > 90 ? 'LightCoral' :
-           depth > 70 ? '#FFA07A' :
-           depth > 50 ? '#DAA520' :
-           depth > 30 ? '#F0E68C' :
-           depth > 10 ? 'LawnGreen' :
-           depth > -10 ? 'LimeGreen' :
-                         '#6495ED';
+    return depth > 90 ? '#FF5f65' :
+           depth > 70 ? '#fca35d' :
+           depth > 50 ? '#fdb72a' :
+           depth > 30 ? '#f7db11' :
+           depth > 10 ? '#dcf400' :
+                         '#a3f600';
 }
 
-// Initialize the map and set its view
-let myMap = L.map("map", {
-    center: [40.758701, -111.876183], // Centering the map on the USA
-    zoom: 5
-});
+//Create a legend to display colour information about the map
+let legend = L.control({position:"bottomright"});
 
-// Add a tile layer (basemap) to the map
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(myMap);
+legend.onAdd = function(map){
+    let div = L.DomUtil.create("div", "info legend"),
+        depthRanges = [-10, 10, 30, 50, 70, 90],
+        labels = [];
+
+        // Loop through the depth intervals and generate a label with a colored square for each interval
+        for (let i = 0; i < depthRanges.length; i++) {
+            div.innerHTML +=
+                '<i style = "background:' + getColor(depthRanges[i] +1) + '"></i>' +
+                depthRanges[i] + (depthRanges[i + 1] ? '&ndash;' + depthRanges[i + 1] + '<br>' : '+');
+        }
+        
+        return div;
+};
+
+// Add the legend to the map
+legend.addTo(myMap);
 
 function createFeatures(earthquakeData) {
     // Arrays to hold the created earthquake markers
@@ -45,8 +66,8 @@ function createFeatures(earthquakeData) {
             L.circle([latitude, longitude], {
                 stroke : true,
                 color: "black",
-                weight: 4,
-                fillOpacity: 0.5,
+                weight: 0.2,
+                fillOpacity: 1,
                 fillColor: getColor(depth),
                 radius: magnitude * 10000
             }).bindPopup(`<h3>Magnitude: ${magnitude}</h3><hr><p>Depth: ${depth} km</p>`)
