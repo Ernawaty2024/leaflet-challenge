@@ -33,18 +33,30 @@ function getColor(depth) {
 let legend = L.control({position:"bottomright"});
 
 legend.onAdd = function(map){
-    let div = L.DomUtil.create("div", "info legend"),
-        depthRanges = [-10, 10, 30, 50, 70, 90],
-        labels = [];
+    let div = L.DomUtil.create('div', 'info legend');
+       
+    // Add a white background and some padding to the legend
+    div.style.backgroundColor = 'white';
+    div.style.padding = '10px';
+    div.style.boxShadow =  '0 0 15px rgba(0, 0, 0, 0.3)';
 
-        // Loop through the depth intervals and generate a label with a colored square for each interval
-        for (let i = 0; i < depthRanges.length; i++) {
-            div.innerHTML +=
-                '<i style = "background:' + getColor(depthRanges[i] +1) + '"></i>' +
-                depthRanges[i] + (depthRanges[i + 1] ? '&ndash;' + depthRanges[i + 1] + '<br>' : '+');
-        }
+    let grades = [-10, 10, 30, 50, 70, 90];
+    let labels = [];
+    let from, to;
+
+    // Loop through the depth intervals and generate a label with a colored square for each interval
+    for (let i = 0; i < grades.length; i++) {
+        from = grades [i];
+        to = grades[i + 1];
+
+        labels.push(
+            '<i style="background:' + getColor(from + 1) + '; width: 14px; height: 14px; display: inline-block; margin-right: 8px;"></i> ' +
+            from + (to ? '&ndash;' + to : '+')
+        );
+    }
         
-        return div;
+    div.innerHTML =labels.join('<br>');
+    return div;
 };
 
 // Add the legend to the map
