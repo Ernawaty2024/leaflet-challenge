@@ -24,11 +24,3 @@ When a dataset (such as "All Earthquakes from the Past 7 Days") was clicked, a J
 5. The visualization looked something like the map below:
 
 
-## Part 2: Gather and Plot More Data 
-### Step 1: Plot a Second Dataset
-1. A second dataset was plotted on the map to illustrate the relationship between tectonic plates and seismic activity. This dataset was pulled in and visualized alongside the original data. Data on tectonic plates was found at this GitHub repository.
-### Step 2: Enhance the Map
-1. The tectonic plates dataset was plotted on the map in addition to the earthquakes.
-2. Other base maps were added to choose from.
-3. Each dataset was put into separate overlays that could be turned on and off independently.
-4. Layer controls were added to the map.
