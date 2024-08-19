@@ -82,7 +82,7 @@ function createFeatures(earthquakeData) {
                 fillOpacity: 1,
                 fillColor: getColor(depth),
                 radius: magnitude * 10000
-            }).bindPopup(`<h3>Magnitude: ${magnitude}</h3><hr><p>Depth: ${depth} km</p>`)
+            }).bindPopup(`<h3>Magnitude: ${magnitude}</h3><hr><p>Depth: ${depth} km</p><hr><p>Longitute, Latitude: ${longitude}, ${latitude}</p>`)
         );
     });
 
