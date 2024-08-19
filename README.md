@@ -18,7 +18,6 @@ When a dataset (such as "All Earthquakes from the Past 7 Days") was clicked, a J
 ### Step 2: Import and Visualize the Data
 1. Using Leaflet, a map was created to plot all the earthquakes from the dataset based on their longitude and latitude.
 2. The data markers reflected the magnitude of the earthquake by their size and the depth of the earthquake by color. Earthquakes with higher magnitudes appeared larger, and earthquakes with greater depth appeared darker in color.
-
 3. Popups were included to provide additional information about the earthquake when its associated marker was clicked.
 4. A legend was created to provide context for the map data.
 5. The visualization looked something like the map below:
